@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-26.05.tar.gz";
-  symlinkRoot = "./home";
   sharedConfig = {
     programs.git = {
       enable = true;
@@ -20,6 +19,11 @@ let
       };
     };
     
+    programs.nix-your-shell = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     home.file.".config/fish".source = ./config/fish;
     
     home.stateVersion = "26.05";
@@ -31,13 +35,14 @@ in
   ];
 
   home-manager.users.root = { ... }: sharedConfig;
- 
+
   home-manager.users.lapochka = { pkgs, ... }: lib.recursiveUpdate {
     home.packages = with pkgs; [
       qpwgraph
       pwvucontrol
       keepassxc
       mumble
+      hyprpaper
     ];
     
     programs.librewolf = {
@@ -52,13 +57,24 @@ in
       };
     };
 
-    programs.nix-your-shell = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-
     programs.fuzzel = {
       enable = true;
+    };
+
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        splash = false;
+        preload = [
+          "/etc/nixos/wallpapers/flower2.jxl"
+        ];
+        wallpaper = [
+          {
+            monitor = "";
+            path = "/etc/nixos/wallpapers/flower2.jxl";      
+          }
+        ];
+      };
     };
 
     programs.alacritty = {
@@ -88,17 +104,13 @@ in
           autoUpdateNotification = false;
           disableMinSize = true;
           notifyAboutUpdates = false;
-          plugins = {
-            MessageLogger = {
-              enabled = true;
-              ignoreSelf = true;
-            };
-          };
+          plugins = {};
         };
       };
     };
 
-    # dark mode
+    # dark modei
+    dconf.enable = true;
     dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
     dconf.settings."org/gnome/desktop/interface".gtk-theme = "Adwaita-dark";
     qt = {
@@ -113,6 +125,7 @@ in
     };
 
     # other links
-    home.file.".config/hypr".source = ./config/hypr;
+    home.file.".config/hypr/hyprland.lua".source = ./config/hypr/hyprland.lua;
+    home.file.".config/waybar".source = ./config/waybar;
   } sharedConfig;
 }

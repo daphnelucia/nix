@@ -14,7 +14,12 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  boot.loader.systemd-boot.configurationLimit = 5;
+  
+  hardware.graphics.enable = true;
+  hardware.nvidia.modesetting.enable = true;
+#  boot.initrd.kernelModules = ["nouveau"];
+  
   networking.hostName = "nixos"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
@@ -30,6 +35,7 @@
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   console = {
+    # todo: only use latam layout in console
     useXkbConfig = true; # use xkb.options in tty.
   };
 

@@ -52,7 +52,7 @@ local menu        = "fuzzel"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("waybar & librewolf & vesktop")
+  hl.exec_cmd("waybar & librewolf & vesktop & hyprpaper")
 end)
 
 
@@ -98,7 +98,7 @@ hl.config({
         border_size = 1,
 
         col = {
-            active_border   = "rgba(E436F5CC)",
+            active_border   = "rgba(FFFFFFCC)",
             inactive_border = "rgba(595959aa)",
         },
 
@@ -212,8 +212,9 @@ hl.config({
 
 hl.config({
     misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
+        --force_default_wallpaper = 1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+        disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
+        disable_splash_rendering = true
     },
 })
 
@@ -227,7 +228,10 @@ hl.config({
         kb_layout  = "latam,ru",
         --kb_variant = "",
         --kb_model   = "",
+        
+        -- todo: this conflicts with floating mode
         kb_options = "grp:win_space_toggle,caps:escape",
+
         --kb_rules   = "",
 
         follow_mouse = 1,
@@ -297,10 +301,11 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.resize({ x = 10, y = 0, relative = true}), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.resize({ x = -10, y = 0, relative = true}), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.resize({ x = 0, y = 10, relative = true}), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.resize({ x = 0, y = -10, relative = true}), { repeating = true })
+-- todo: does not work as intended
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.drag({ x = 10, y = 0, relative = true}), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.drag({ x = -10, y = 0, relative = true}), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.drag({ x = 0, y = 10, relative = true}), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.drag({ x = 0, y = -10, relative = true}), { repeating = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
