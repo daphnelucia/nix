@@ -12,7 +12,6 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.kernelPackages = pkgs.linuxPackages_7_1;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -44,13 +43,8 @@
 
   services.greetd.enable = lib.mkDefault false;
   services.displayManager.defaultSession = lib.mkDefault "hyprland-uwsm";
-  #services.displayManager.ly = {
-  #  enable = true;
-  #};
-
-  services.displayManager.sddm = {
+  services.displayManager.ly = {
     enable = true;
-    wayland.enable = true;
   };
 
   # Configure keymap in X11
@@ -72,14 +66,13 @@
   users.users.lapochka = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-
-    ];
+    packages = with pkgs; [];
   };
 
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
