@@ -35,11 +35,15 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
+  
   programs.hyprland = {
     enable = true;
     withUWSM = true;
     xwayland.enable = true;
   };
+  programs.waybar.enable = true;
 
   services.greetd.enable = lib.mkDefault false;
   services.displayManager.defaultSession = lib.mkDefault "hyprland-uwsm";
@@ -57,6 +61,9 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    jack.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -66,14 +73,53 @@
   users.users.lapochka = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [];
+    packages = with pkgs; []; # defined in home manager
+    shell = pkgs.fish;
   };
 
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    helix
     wget
     git
+    gh
+    ntfs3g
   ];
+  fonts = {
+    packages = with pkgs; [
+      # fonts
+      terminus_font
+      liberation_ttf
+      dejavu_fonts
+      freefont_ttf
+      libertinus
+      noto-fonts
+      cantarell-fonts
+      open-sans
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
+      fira-code
+      fira-code-symbols
+      dina-font
+      proggyfonts
+      nerd-fonts.fira-code
+      nerd-fonts.droid-sans-mono
+      comic-mono
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        monospace = [ "Comic Mono" ];  
+      };
+    };
+  };
+
+  fileSystems = let ntfs-drives = [
+    "/mnt/hdd"
+    "/mnt/windows"
+  ]; in lib.genAttrs ntfs-drives (path: {
+    # for write permissions for user
+    options = ["uid=1000"];
+  }); 
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
