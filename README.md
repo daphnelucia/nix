@@ -6,6 +6,7 @@ manually needed:
 * login to accounts
 * install librewolf extensions (ublock, feedbro, web scrobbler, sponsorblock)
 * login to yams with `yams` command
+* eventually port everything in /config to .nix
 
 todo:
 * sync rss feeds
