@@ -11,10 +11,17 @@
       ./home-manager.nix
     ];
 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-unwrapped"
+    "steam-run"
+  ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 2;
   
   hardware.graphics.enable = true;
   hardware.nvidia.modesetting.enable = true;
@@ -57,6 +64,13 @@
   services.displayManager.defaultSession = lib.mkDefault "hyprland-uwsm";
   services.displayManager.ly = {
     enable = true;
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
   # Configure keymap in X11
@@ -124,10 +138,16 @@
   fileSystems = let ntfs-drives = [
     "/mnt/hdd"
     "/mnt/windows"
+  #  "/mnt/data"
   ]; in lib.genAttrs ntfs-drives (path: {
     # for write permissions for user
     options = ["uid=1000"];
-  }); 
+  });
+
+  system.activationScripts.chmod-data.text = ''
+    chmod 777 /mnt/data
+  '';
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -146,7 +166,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  #networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

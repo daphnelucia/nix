@@ -44,17 +44,20 @@ local autostartInWorkspace = {
     {
         "vesktop", -- command
         "vesktop", -- class
-        2 -- workspace
+        2, -- workspace
+        2 -- monitor
     },
     {
         "obs",
         "com.obsproject.Studio",
-        9
+        9,
+        2
     },
     {
         "mumble",
         "info.mumble.Mumble",
-        8
+        8,
+        2
     }
 }
 
@@ -295,7 +298,7 @@ local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + space", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + T", hl.dsp.layout("togglesplit"))    -- dwindle only
@@ -326,11 +329,11 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- todo: does not work as intended
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.drag({ x = 10, y = 0, relative = true}), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.drag({ x = -10, y = 0, relative = true}), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.drag({ x = 0, y = 10, relative = true}), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.drag({ x = 0, y = -10, relative = true}), { repeating = true })
+-- move windows with keys
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "down" }))
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
@@ -397,6 +400,14 @@ hl.window_rule({
     float = true,
 })
 
+hl.window_rule({
+    name = "picture-in-picture-float",
+    match = { title = "Picture-in-Picture" },
+    float = true
+})
+
+local monitors = { "HDMI-A-1", "DP-1" }
+
 for _, autostart in pairs(autostartInWorkspace) do
   hl.window_rule({
       name = "autostart-" .. autostart[1],
@@ -405,4 +416,8 @@ for _, autostart in pairs(autostartInWorkspace) do
       },
       workspace = autostart[3]
   })
+  hl.workspace_rule({ workspace = autostart[3], monitor = monitors[autostart[4]], default = true })
 end
+
+
+hl.workspace_rule({ workspace = "1", monitor = monitors[1], default = true })
