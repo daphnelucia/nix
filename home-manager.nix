@@ -57,6 +57,25 @@ in
       };
     };
 
+    programs.obs-studio = {
+      enable = true;
+
+      # optional Nvidia hardware acceleration
+      package = (
+        pkgs.obs-studio.override {
+          cudaSupport = true;
+        }
+      );
+
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        obs-backgroundremoval
+        obs-pipewire-audio-capture
+        obs-gstreamer
+        obs-vkcapture
+      ];
+    };
+
     programs.fuzzel = {
       enable = true;
     };
@@ -123,6 +142,23 @@ in
         ${builtins.readFile "${pkgs.kdePackages.breeze}/share/color-schemes/BreezeDark.colors"}
       '';
     };
+
+    # cursor
+    home.pointerCursor =
+    let
+      getFrom = path: name: {
+        gtk.enable = true;
+        x11.enable = true;
+        name = name;
+        size = 48;
+        package = pkgs.runCommand "moveUp" { } ''
+          mkdir -p $out/share/icons
+          ln -s ${path} $out/share/icons/${name}
+        '';
+      };
+    in
+      getFrom ./cursors/Imouto
+        "Imouto";
 
     # other links
     home.file.".config/hypr/hyprland.lua".source = ./config/hypr/hyprland.lua;

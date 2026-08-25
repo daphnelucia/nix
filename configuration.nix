@@ -18,7 +18,7 @@
   
   hardware.graphics.enable = true;
   hardware.nvidia.modesetting.enable = true;
-#  boot.initrd.kernelModules = ["nouveau"];
+  boot.initrd.kernelModules = ["nouveau"];
   
   networking.hostName = "nixos"; # Define your hostname.
 
@@ -49,8 +49,10 @@
     withUWSM = true;
     xwayland.enable = true;
   };
-  programs.waybar.enable = true;
 
+  programs.waybar.enable = true;
+  programs.obs-studio.enableVirtualCamera = true;
+  
   services.greetd.enable = lib.mkDefault false;
   services.displayManager.defaultSession = lib.mkDefault "hyprland-uwsm";
   services.displayManager.ly = {

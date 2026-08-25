@@ -40,6 +40,23 @@ hl.monitor({
 local terminal    = "alacritty"
 local fileManager = "dolphin"
 local menu        = "fuzzel"
+local autostartInWorkspace = {
+    {
+        "vesktop", -- command
+        "vesktop", -- class
+        2 -- workspace
+    },
+    {
+        "obs",
+        "com.obsproject.Studio",
+        9
+    },
+    {
+        "mumble",
+        "info.mumble.Mumble",
+        8
+    }
+}
 
 
 -------------------
@@ -52,7 +69,11 @@ local menu        = "fuzzel"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("waybar & librewolf & vesktop & hyprpaper")
+  hl.exec_cmd("waybar & hyprpaper")
+  hl.exec_cmd("librewolf")
+  for _, autostart in pairs(autostartInWorkspace) do
+      hl.exec_cmd(autostart[1])
+  end
 end)
 
 
@@ -216,6 +237,10 @@ hl.config({
         disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
         disable_splash_rendering = true
     },
+    cursor = {
+        no_warps = true,
+        no_hardware_cursors = true
+    }
 })
 
 
@@ -371,3 +396,13 @@ hl.window_rule({
     move  = "20 monitor_h-120",
     float = true,
 })
+
+for _, autostart in pairs(autostartInWorkspace) do
+  hl.window_rule({
+      name = "autostart-" .. autostart[1],
+      match = {
+          class = autostart[2]
+      },
+      workspace = autostart[3]
+  })
+end
