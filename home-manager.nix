@@ -43,6 +43,8 @@ in
       keepassxc
       mumble
       hyprpaper
+      rmpc
+      yams
 
       kdePackages.dolphin
       kdePackages.qtsvg
@@ -101,6 +103,14 @@ in
           }
         ];
       };
+    };
+
+    services.mpd = {
+      enable = true;
+      musicDirectory = "/mnt/hdd/awa";
+      # Optional:
+      #network.listenAddress = "any"; # if you want to allow non-localhost connections
+      network.startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
     };
 
     programs.alacritty = {

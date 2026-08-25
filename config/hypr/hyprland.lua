@@ -44,7 +44,7 @@ local autostartInWorkspace = {
     {
         "vesktop", -- command
         "vesktop", -- class
-        2, -- workspace
+        7, -- workspace
         2 -- monitor
     },
     {
@@ -72,7 +72,7 @@ local autostartInWorkspace = {
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("waybar & hyprpaper")
+  hl.exec_cmd("waybar & hyprpaper & yams")
   hl.exec_cmd("librewolf")
 
   -- clipboard
@@ -307,7 +307,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + T", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind(mainMod .. " + C", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))

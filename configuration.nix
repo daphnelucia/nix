@@ -105,6 +105,7 @@
     git
     gh
     ntfs3g
+    hyprshutdown
   ];
   fonts = {
     packages = with pkgs; [
