@@ -16,6 +16,8 @@
     "steam-original"
     "steam-unwrapped"
     "steam-run"
+    "nvidia-x11"
+    "nvidia-settings"
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -25,8 +27,9 @@
   
   hardware.graphics.enable = true;
   hardware.nvidia.modesetting.enable = true;
-  boot.initrd.kernelModules = ["nouveau"];
-  
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.open = true;
+    
   networking.hostName = "nixos"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
@@ -59,6 +62,9 @@
 
   programs.waybar.enable = true;
   programs.obs-studio.enableVirtualCamera = true;
+
+  services.geoclue2.enable = true;
+  location.provider = "geoclue2";
   
   services.greetd.enable = lib.mkDefault false;
   services.displayManager.defaultSession = lib.mkDefault "hyprland-uwsm";

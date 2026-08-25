@@ -72,7 +72,7 @@ local autostartInWorkspace = {
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("waybar & hyprpaper & yams")
+  hl.exec_cmd("waybar & hyprpaper & gammastep & yams")
   hl.exec_cmd("librewolf")
 
   -- clipboard
@@ -248,7 +248,7 @@ hl.config({
     },
     cursor = {
         no_warps = true,
-        no_hardware_cursors = true
+        no_hardware_cursors = false
     }
 })
 

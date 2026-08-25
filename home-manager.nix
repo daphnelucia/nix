@@ -89,6 +89,23 @@ in
       enable = true;
     };
 
+    services.gammastep = {
+      enable = true;
+      provider = "geoclue2";
+    };
+
+    #services.hyprsunset.enable = true;
+    #services.wlsunset = {
+    #  enable = true;
+    #  temperature = {
+    #    day = 6500;
+    #    night = 4000;
+    #  };
+    #  # 24.933333, -104.916667
+    #  latitude = 24.93;
+    #  longitude = -104.91;
+    #};
+
     services.hyprpaper = {
       enable = true;
       settings = {
