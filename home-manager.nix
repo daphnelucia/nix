@@ -53,7 +53,8 @@ in
       cliphist
       wl-clip-persist
     ];
-    
+
+    # programs
     programs.librewolf = {
       enable = true;
       # Enable WebGL, cookies and history
@@ -88,55 +89,7 @@ in
     programs.fuzzel = {
       enable = true;
     };
-
-    services.gammastep = {
-      enable = true;
-      provider = "geoclue2";
-    };
-
-    #services.hyprsunset.enable = true;
-    #services.wlsunset = {
-    #  enable = true;
-    #  temperature = {
-    #    day = 6500;
-    #    night = 4000;
-    #  };
-    #  # 24.933333, -104.916667
-    #  latitude = 24.93;
-    #  longitude = -104.91;
-    #};
-
-    services.hyprpaper = {
-      enable = true;
-      settings = {
-        splash = false;
-        preload = [
-          "/etc/nixos/wallpapers/flower2.jxl"
-        ];
-        wallpaper = [
-          {
-            monitor = "";
-            path = "/etc/nixos/wallpapers/flower2.jxl";      
-          }
-        ];
-      };
-    };
-
-    services.mpd = {
-      enable = true;
-      musicDirectory = "/mnt/hdd/awa";
-      extraConfig = ''
-        audio_output {
-          type            "pipewire"
-          name            "Pipewire"
-          mixer_type      "software"
-        }    
-      '';
-      # Optional:
-      #network.listenAddress = "any"; # if you want to allow non-localhost connections
-      network.startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
-    };
-
+    
     programs.alacritty = {
       enable = true;
       settings = {
@@ -169,6 +122,41 @@ in
       };
     };
 
+    # services
+    services.gammastep = {
+      enable = true;
+      provider = "geoclue2";
+    };
+
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        splash = false;
+        preload = [
+          "/etc/nixos/wallpapers/flower2.jxl"
+        ];
+        wallpaper = [
+          {
+            monitor = "";
+            path = "/etc/nixos/wallpapers/flower2.jxl";      
+          }
+        ];
+      };
+    };
+
+    services.mpd = {
+      enable = true;
+      musicDirectory = "/mnt/hdd/awa";
+      extraConfig = ''
+        audio_output {
+          type            "pipewire"
+          name            "Pipewire"
+          mixer_type      "software"
+        }    
+      '';
+      network.startWhenNeeded = true;
+    };
+    
     # dark mode
     dconf.enable = true;
     dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
