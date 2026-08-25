@@ -6,9 +6,10 @@ manually needed:
 * login to accounts
 * install librewolf extensions (ublock, feedbro, web scrobbler, sponsorblock)
 * login to yams with `yams` command
-* eventually port everything in /config to .nix
 
-todo:
+todo: 
+* setup syncthing and zerotier
+* eventually port everything in /config to .nix
 * sync rss feeds
 * if able to sync librewolf extensions: sync web scrobbler bulk edits with version on gist
 
