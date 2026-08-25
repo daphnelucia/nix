@@ -8,5 +8,5 @@ manually needed:
 
 todo:
 * sync rss feeds
-
+* if able to sync librewolf extensions: sync web scrobbler bulk edits with version on gist
 
