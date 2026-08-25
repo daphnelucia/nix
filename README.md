@@ -6,8 +6,11 @@ manually needed:
 * login to accounts
 * install librewolf extensions (ublock, feedbro, web scrobbler, sponsorblock)
 * login to yams with `yams` command
+* setup obsidian vault (probably replace obsidian with org mode eventually)
+* setup spacemacs
 
 todo: 
+* setup tablet drivers
 * setup syncthing and zerotier
 * eventually port everything in /config to .nix
 * sync rss feeds

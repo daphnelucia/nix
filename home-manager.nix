@@ -25,7 +25,7 @@ let
     };
 
     home.file.".config/fish".source = ./config/fish;
-    
+        
     home.stateVersion = "26.05";
   }; 
 in
@@ -45,6 +45,9 @@ in
       hyprpaper
       rmpc
       yams
+      imv
+      hyprshot
+      anki
 
       kdePackages.dolphin
       kdePackages.qtsvg
@@ -52,6 +55,9 @@ in
       wl-clipboard
       cliphist
       wl-clip-persist
+    ];
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "obsidian"
     ];
 
     # programs
@@ -119,6 +125,17 @@ in
           notifyAboutUpdates = false;
           plugins = {};
         };
+      };
+    };
+
+    programs.obsidian = {
+      enable = true;
+
+#      vaults.vault.target = "../../mnt/hdd/vault";
+
+      defaultSettings.app = {
+        alwaysUpdateLinks = true;
+        spellcheck = true;
       };
     };
 

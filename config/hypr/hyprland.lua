@@ -298,6 +298,11 @@ hl.device({
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
+local screenshotFolder = "/mnt/data/Screenshots"
+hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot -m output -m HDMI-A-1 -o " .. screenshotFolder))
+hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("hyprshot -m output -m DP-1 -o " .. screenshotFolder))
+hl.bind("CTRL + PRINT", hl.dsp.exec_cmd("hyprshot -zm region -o " .. screenshotFolder))
+
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())

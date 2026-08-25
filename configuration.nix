@@ -17,7 +17,7 @@
     "steam-unwrapped"
     "steam-run"
     "nvidia-x11"
-    "nvidia-settings"
+    "nvidia-settings"    
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -112,7 +112,9 @@
     gh
     ntfs3g
     hyprshutdown
+    emacs
   ];
+  
   fonts = {
     packages = with pkgs; [
       # fonts
