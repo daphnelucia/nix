@@ -74,6 +74,12 @@ local autostartInWorkspace = {
 hl.on("hyprland.start", function () 
   hl.exec_cmd("waybar & hyprpaper")
   hl.exec_cmd("librewolf")
+
+  -- clipboard
+  hl.exec_cmd("wl-clip-persist --clipboard both")
+  hl.exec_cmd("sh -c \"wl-paste --type text --watch cliphist store\"")
+  hl.exec_cmd("sh -c \"wl-paste --type image --watch cliphist store\"") 
+  
   for _, autostart in pairs(autostartInWorkspace) do
       hl.exec_cmd(autostart[1])
   end
@@ -334,6 +340,9 @@ hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
 hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "down" }))
+
+-- toggle window monitor
+hl.bind(mainMod .. " + RETURN", hl.dsp.window.move({ monitor = "+1" }))
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })

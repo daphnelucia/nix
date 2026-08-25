@@ -43,6 +43,13 @@ in
       keepassxc
       mumble
       hyprpaper
+
+      kdePackages.dolphin
+      kdePackages.qtsvg
+
+      wl-clipboard
+      cliphist
+      wl-clip-persist
     ];
     
     programs.librewolf = {
@@ -128,7 +135,7 @@ in
       };
     };
 
-    # dark modei
+    # dark mode
     dconf.enable = true;
     dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
     dconf.settings."org/gnome/desktop/interface".gtk-theme = "Adwaita-dark";
