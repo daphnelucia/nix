@@ -13,6 +13,6 @@ todo:
 * setup tablet drivers
 * setup syncthing and zerotier
 * eventually port everything in /config to .nix
-* sync rss feeds
+* sync rss feeds and bookmarks
 * if able to sync librewolf extensions: sync web scrobbler bulk edits with version on gist
 

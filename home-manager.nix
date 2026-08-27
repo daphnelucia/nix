@@ -48,6 +48,8 @@ in
       imv
       hyprshot
       anki
+      telegram-desktop
+      thunderbird
 
       kdePackages.dolphin
       kdePackages.qtsvg
@@ -143,6 +145,12 @@ in
     services.gammastep = {
       enable = true;
       provider = "geoclue2";
+      duskTime = "18:35-20:15";
+      dawnTime = "6:00-7:45";
+      temperature = {
+        day = 6500;
+        night = 3700;
+      };
     };
 
     services.hyprpaper = {
