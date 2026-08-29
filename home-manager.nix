@@ -19,6 +19,17 @@ let
       };
     };
     
+    programs.neovim = {
+      enable = true;
+      defaultEditor = true;
+
+      extraConfig = ''
+        set relativenumber
+        set tabstop=4
+        set shiftwidth=4
+      '';
+    };
+    
     programs.nix-your-shell = {
       enable = true;
       enableFishIntegration = true;
@@ -64,6 +75,7 @@ in
     ];
 
     # programs
+
     programs.librewolf = {
       enable = true;
       # Enable WebGL, cookies and history
