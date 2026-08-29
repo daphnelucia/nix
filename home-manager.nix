@@ -50,6 +50,7 @@ in
       anki
       telegram-desktop
       thunderbird
+      nicotine-plus
 
       kdePackages.dolphin
       kdePackages.qtsvg
