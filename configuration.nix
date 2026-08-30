@@ -115,9 +115,11 @@
     ntfs3g
     hyprshutdown
     emacs
+    libqalculate
+
     steamcmd
     pkgsi686Linux.gperftools
-    libqalculate
+
   ];
  
   fonts = {
