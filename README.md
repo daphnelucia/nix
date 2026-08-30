@@ -8,8 +8,12 @@ manually needed:
 * login to yams with `yams` command
 * setup obsidian vault (probably replace obsidian with org mode eventually)
 * setup spacemacs
+* setup default audio devices
+* change gmod launch command to `GMOD_ENABLE_LD_PRELOAD=1 LD_PRELOAD=$LD_PRELOAD:/run/current-system/sw/lib/libtcmalloc_minimal.so %command%`
 
-todo: 
+todo:
+* declarative flatpak
+* setup srcds & figure out libraries needed
 * setup tablet drivers
 * setup syncthing and zerotier
 * eventually port everything in /config to .nix

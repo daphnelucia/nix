@@ -13,6 +13,7 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "steam"
+    "steamcmd"
     "steam-original"
     "steam-unwrapped"
     "steam-run"
@@ -51,6 +52,7 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
+  services.flatpak.enable = true;
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
   
@@ -113,8 +115,11 @@
     ntfs3g
     hyprshutdown
     emacs
+    steamcmd
+    pkgsi686Linux.gperftools
+    libqalculate
   ];
-  
+ 
   fonts = {
     packages = with pkgs; [
       # fonts
