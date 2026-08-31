@@ -12,8 +12,9 @@ manually needed:
 * change gmod launch command to `GMOD_ENABLE_LD_PRELOAD=1 LD_PRELOAD=$LD_PRELOAD:/run/current-system/sw/lib/libtcmalloc_minimal.so %command%`
 
 todo:
-* declarative flatpak
+* move flatpak installation to home-manager (https://github.com/gmodena/nix-flatpak/discussions/195#discussioncomment-17215733)
 * setup srcds & figure out libraries needed
+* setup playit declaratively
 * setup tablet drivers
 * setup syncthing and zerotier
 * eventually port everything in /config to .nix

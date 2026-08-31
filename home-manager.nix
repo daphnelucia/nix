@@ -35,14 +35,14 @@ let
       enableFishIntegration = true;
     };
 
-    home.file.".config/fish".source = ./config/fish;
+    home.file.".config/fish/config.fish".source = ./config/fish/config.fish;
         
     home.stateVersion = "26.05";
   }; 
 in
 {
   imports = [
-    (import "${home-manager}/nixos")
+    (import "${home-manager}/nixos")    
   ];
 
   home-manager.users.root = { ... }: sharedConfig;
@@ -62,6 +62,7 @@ in
       telegram-desktop
       thunderbird
       nicotine-plus
+      krita
 
       kdePackages.dolphin
       kdePackages.qtsvg
@@ -146,8 +147,6 @@ in
     programs.obsidian = {
       enable = true;
 
-#      vaults.vault.target = "../../mnt/hdd/vault";
-
       defaultSettings.app = {
         alwaysUpdateLinks = true;
         spellcheck = true;
@@ -155,6 +154,7 @@ in
     };
 
     # services
+    
     services.gammastep = {
       enable = true;
       provider = "geoclue2";

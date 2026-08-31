@@ -2,13 +2,25 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+let
+  # External let binding to fetch nix-flatpak without 
+  # causing infinite recursion.
+  pkgs = import <nixpkgs> {};
+  
+  nix-flatpak = pkgs.fetchFromGitHub {
+    owner = "gmodena";
+    repo = "nix-flatpak";
+    rev = "v0.7.0";
+    hash = "sha256-7ZCulYUD9RmJIDULTRkGLSW1faMpDlPKcbWJLYHoXcs=";
+  };
+in { config, lib, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./home-manager.nix
+      "${nix-flatpak}/modules/nixos.nix"
     ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -24,7 +36,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 2;
+  boot.loader.systemd-boot.configurationLimit = 5;
   
   hardware.graphics.enable = true;
   hardware.nvidia.modesetting.enable = true;
@@ -52,7 +64,13 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-  services.flatpak.enable = true;
+  services.flatpak = {
+    enable = true;
+    packages = [
+      "org.vinegarhq.Sober"
+      "org.prismlauncher.PrismLauncher"
+    ];
+  };
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
   
@@ -116,6 +134,7 @@
     hyprshutdown
     emacs
     libqalculate
+    ffmpeg
 
     steamcmd
     pkgsi686Linux.gperftools
