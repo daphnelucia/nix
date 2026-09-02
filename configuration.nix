@@ -64,6 +64,21 @@ in { config, lib, pkgs, ... }:
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
+  services.zerotierone = {
+    enable = true;
+    localConf = {
+      physical = {
+        "0.0.0.0/0" = {
+          mtu = 800;
+        };
+      };
+    };
+  };
+  services.syncthing = {
+    enable = true;
+    openDefaultPorts = true;
+  };
+
   services.flatpak = {
     enable = true;
     packages = [
@@ -135,6 +150,7 @@ in { config, lib, pkgs, ... }:
     emacs
     libqalculate
     ffmpeg
+    unzip
 
     steamcmd
     pkgsi686Linux.gperftools
