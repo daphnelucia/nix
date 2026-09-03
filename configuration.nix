@@ -116,6 +116,13 @@ in { config, lib, pkgs, ... }:
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+  hardware.steam-hardware.enable = true;
+  services.udev = {
+    packages = with pkgs; [
+      game-devices-udev-rules
+    ];
+  };
+  hardware.uinput.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "latam,ru";
