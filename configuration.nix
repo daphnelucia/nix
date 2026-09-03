@@ -74,6 +74,9 @@ in { config, lib, pkgs, ... }:
       };
     };
   };
+  networking.hosts = {
+    "172.30.185.131" = ["biz.local"];
+  };
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
