@@ -10,6 +10,7 @@ manually needed:
 * setup spacemacs
 * setup default audio devices
 * change gmod launch command to `GMOD_ENABLE_LD_PRELOAD=1 LD_PRELOAD=$LD_PRELOAD:/run/current-system/sw/lib/libtcmalloc_minimal.so %command%`
+* setup r2modman/bepinex for ultimate chicken horse
 
 todo:
 * move flatpak installation to home-manager (https://github.com/gmodena/nix-flatpak/discussions/195#discussioncomment-17215733)
