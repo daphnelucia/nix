@@ -64,6 +64,8 @@ in
       thunderbird
       nicotine-plus
       krita
+      milkytracker
+      mpv
 
       kdePackages.dolphin
       kdePackages.qtsvg
