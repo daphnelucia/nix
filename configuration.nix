@@ -76,6 +76,7 @@ in { config, lib, pkgs, ... }:
   };
   networking.hosts = {
     "172.30.185.131" = ["biz.local"];
+    "127.0.0.1" = ["reddit.com" "www.reddit.com" "www.youtube.com" "youtube.com" "www.instagram.com" "instagram.com"];
   };
   services.syncthing = {
     enable = true;
@@ -108,6 +109,10 @@ in { config, lib, pkgs, ... }:
   services.displayManager.defaultSession = lib.mkDefault "hyprland-uwsm";
   services.displayManager.ly = {
     enable = true;
+    settings = {
+      #animation = "dur_file";
+      #dur_file_path = "${./config/example.dur}";
+    };
   };
 
   programs.steam = {

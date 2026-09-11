@@ -13,6 +13,7 @@ manually needed:
 * setup r2modman/bepinex for ultimate chicken horse
 
 todo:
+* when next ly version is released (https://codeberg.org/fairyglade/ly/releases/tag/v1.5.0-rc1), add cute animations to login screen
 * move flatpak installation to home-manager (https://github.com/gmodena/nix-flatpak/discussions/195#discussioncomment-17215733)
 * setup srcds & figure out libraries needed
 * setup playit declaratively
