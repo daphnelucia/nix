@@ -155,7 +155,11 @@ in { config, lib, pkgs, ... }:
     shell = pkgs.fish;
   };
 
+  documentation.dev.enable = true;
+  
   environment.systemPackages = with pkgs; [
+    man-pages
+    man-pages-posix
     helix
     wget
     git
